@@ -64,10 +64,24 @@ def get_customer(customer_id: UUID):
 
     return customer
 
+"""
+FastAPI mental model
+GET     → retrieve something
+POST    → create something
+PUT     → replace something
+PATCH   → modify something
+DELETE  → remove something
 
-# FastAPI mental model
-# GET     → retrieve something
-# POST    → create something
-# PUT     → replace something
-# PATCH   → modify something
-# DELETE  → remove something
+
+schemas/
+    What does the data look like?
+
+services/
+    What does the application do with the data?
+
+api/
+    Which HTTP endpoints expose that behavior?
+
+main.py
+    Assemble the application.
+"""
