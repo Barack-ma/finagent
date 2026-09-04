@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
 
 
 class CustomerCreate(BaseModel):
@@ -10,6 +10,11 @@ class CustomerCreate(BaseModel):
 
 
 class Customer(BaseModel):
+    model_config = ConfigDict(
+        # Building a response from attributes on an ORM object
+        from_attributes=True
+    )
+
     id: UUID
     first_name: str
     last_name: str
