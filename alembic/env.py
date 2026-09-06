@@ -6,6 +6,7 @@ from sqlalchemy import engine_from_config, pool
 
 from app.core.database import Base
 from app.models.customer import CustomerModel
+from app.models.loan import LoanModel
 
 
 load_dotenv()
