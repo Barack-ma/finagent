@@ -3,6 +3,7 @@ import os
 from alembic import context
 from dotenv import load_dotenv
 from sqlalchemy import engine_from_config, pool
+from app.models.payment import PaymentModel
 
 from app.core.database import Base
 from app.models.customer import CustomerModel
