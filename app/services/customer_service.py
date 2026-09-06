@@ -1,10 +1,15 @@
 from uuid import UUID
 
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.models.customer import CustomerModel
 from app.schemas.customer import CustomerCreate
+
+
+class DuplicateCustomerEmailError(Exception):
+    pass
 
 
 def create_customer(
@@ -18,8 +23,14 @@ def create_customer(
     )
 
     db.add(customer)
-    db.commit()
-    db.refresh(customer) # reloads objects from PostgreSQL eg UUIDs
+
+    try:
+        db.commit()
+    except IntegrityError:
+        db.rollback()
+        raise DuplicateCustomerEmailError
+
+    db.refresh(customer)
 
     return customer
 
@@ -28,10 +39,7 @@ def get_all_customers(
     db: Session,
 ) -> list[CustomerModel]:
     statement = select(CustomerModel)
-
-    return list(
-        db.scalars(statement).all()
-    )
+    return list(db.scalars(statement).all())
 
 
 def get_customer_by_id(

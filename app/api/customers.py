@@ -8,11 +8,11 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 from app.schemas.customer import Customer, CustomerCreate
 from app.services.customer_service import (
+    DuplicateCustomerEmailError,
     create_customer,
     get_all_customers,
     get_customer_by_id,
 )
-
 
 router = APIRouter(
     prefix="/customers",
@@ -29,7 +29,13 @@ def create_customer_endpoint(
     customer_data: CustomerCreate,
     db: Session = Depends(get_db),
 ):
-    return create_customer(db, customer_data)
+    try:
+        return create_customer(db, customer_data)
+    except DuplicateCustomerEmailError:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="A customer with this email already exists",
+        )
 
 
 @router.get(

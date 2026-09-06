@@ -1,12 +1,7 @@
 from fastapi import FastAPI
 
 from app.api.customers import router as customers_router
-from app.core.database import Base, engine
-from app.models.customer import CustomerModel
 
-
-Base.metadata.create_all(bind=engine)
-# Creates missing tables
 
 app = FastAPI(
     title="FinAgent API",
