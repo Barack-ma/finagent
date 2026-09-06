@@ -4,6 +4,7 @@ from app.api.customers import router as customers_router
 from app.api.loans import router as loans_router
 from app.api.payments import router as payments_router
 from app.api.summaries import router as summaries_router
+from app.api.policies import router as policies_router
 app = FastAPI(
     title="FinAgent API",
     description="AI-powered lending operations agent",
@@ -15,6 +16,7 @@ app.include_router(customers_router)
 app.include_router(loans_router)
 app.include_router(payments_router)
 app.include_router(summaries_router)
+app.include_router(policies_router)
 
 
 @app.get("/health")

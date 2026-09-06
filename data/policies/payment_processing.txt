@@ -1,0 +1,11 @@
+Payment Processing Policy
+
+Payments may be accepted only for active loan accounts.
+
+The payment amount must be greater than zero.
+
+A payment must not exceed the remaining principal balance unless an approved payoff workflow is being used.
+
+Payments must be recorded before a successful confirmation is returned to the customer.
+
+If payment processing fails, the customer must not be told that the payment succeeded.
