@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 
+from app.api.agent import router as agent_router
 from app.api.customers import router as customers_router
 from app.api.loans import router as loans_router
 from app.api.payments import router as payments_router
@@ -17,6 +18,7 @@ app.include_router(loans_router)
 app.include_router(payments_router)
 app.include_router(summaries_router)
 app.include_router(policies_router)
+app.include_router(agent_router)
 
 
 @app.get("/health")
